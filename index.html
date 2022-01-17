@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="sidebar">
+        <!--DO NOT CHANGE THIS ID's-->
+      </div>
+
+      <div id="search">
+        <input type="text" id="searchbar" placeholder="Search News" />
+        <button>Search</button>
+        <hr />
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="module">
+  import sidebar from "./components/sidebar.js";
+  import { apiCall, appendArticles } from "./scripts/main.js";
+  // import storeSearchterm from "./scripts/search.js";
+
+  var side_bar = document.getElementById("sidebar");
+
+  side_bar.innerHTML = sidebar();
+
+  let append_data = document.getElementById("main");
+
+  let response = await apiCall(
+    "https://gnews.io/api/v4/top-headlines?lang=en&country=in&token=4ca68f818e1c31a2d3e682f9b6f20930"
+  );
+
+  let data = response.articles;
+  console.log(data);
+
+  appendArticles(data, append_data);
+
+  //
+
+  document.querySelector("button").addEventListener("click", searchNews);
+
+  function searchNews() {
+    let search_data = document.getElementById("searchbar").value;
+    console.log(search_data);
+
+    var article = [];
+
+    article.push(search_data);
+
+    localStorage.setItem("search_term", JSON.stringify(article));
+
+    window.location.href = "search.html";
+  }
+</script>

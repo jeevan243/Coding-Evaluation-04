@@ -1,0 +1,26 @@
+#sidebar {
+  background-color: teal;
+  width: 150px;
+  height: 750px;
+  text-align: center;
+  position: fixed;
+}
+#sidebar > h3 {
+  margin-top: 50px;
+}
+
+#main {
+  display: grid;
+  margin-left: 200px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+img {
+  height: 200px;
+}
+
+#search {
+  margin-left: 300px;
+  margin-bottom: 50px;
+}
